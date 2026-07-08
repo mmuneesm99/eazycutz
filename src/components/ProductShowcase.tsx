@@ -6,8 +6,9 @@ import {
   BadgePercent, Sparkles, Gift, ShieldCheck, Calculator,
   FileSpreadsheet, Network,
 } from "lucide-react";
-import { ProductDashboard } from "@/components/ui/ProductDashboard";
+import { ProductScreenshot } from "@/components/ui/ProductScreenshot";
 import { PromoSection } from "@/components/layout/PromoSection";
+import { images } from "@/lib/images";
 import { fadeUp, staggerContainerFast, viewport } from "@/lib/motion";
 
 const modules = [
@@ -34,15 +35,18 @@ export default function ProductShowcase() {
       subheadline="Twelve modules. Zero integrations to maintain."
       links={[
         { label: "Learn more", href: "#builder" },
-        { label: "Book a demo", href: "#cta", primary: true },
+        { label: "Book a demo", href: "#cta", primary: true, action: "book-demo" },
       ]}
-      visualClassName="px-4 sm:px-6 max-w-[1100px] mx-auto pb-10 sm:pb-14"
+      visualClassName="px-4 sm:px-6 max-w-[1280px] mx-auto pb-10 sm:pb-14"
     >
-      <div className="rounded-xl md:rounded-2xl overflow-hidden shadow-[0_20px_60px_rgba(0,0,0,0.12)] mb-10 sm:mb-12">
-        <ProductDashboard />
+      <div className="mb-10 sm:mb-12">
+        <ProductScreenshot
+          src={images.product.dashboard}
+          alt="EazyCutz complete salon operating system dashboard"
+        />
       </div>
 
-      <div className="mx-auto max-w-[980px] px-5 sm:px-6 pb-12 sm:pb-16">
+      <div className="mx-auto max-w-[1200px] px-5 sm:px-6 pb-12 sm:pb-16">
         <motion.div
           className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-2 sm:gap-3"
           initial="hidden"

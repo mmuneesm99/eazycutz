@@ -1,24 +1,132 @@
-import type { Metadata } from "next";
+import type { Metadata, Viewport } from "next";
 import "./globals.css";
 import { MotionProvider } from "@/components/motion/MotionProvider";
+import ContactModal from "@/components/ContactModal";
+import { ContactModalProvider } from "@/context/ContactModalContext";
+
+const siteUrl = "https://eazycutz.com";
+const siteName = "EazyCutz";
+const title = "EazyCutz | The Modern Salon Operating System";
+const description =
+  "One platform to simplify operations, delight customers and grow your salon business. Built for salons. Designed for growth.";
 
 export const metadata: Metadata = {
-  title: "EazyCutz - The Modern Salon Operating System",
-  description: "EazyCutz is a premium, handcrafted Salon Operating System. Build custom memberships, automate scheduling, streamline client relations, and scale your salon operations.",
-  keywords: ["salon software", "salon CRM", "booking system", "stylist scheduling", "salon app", "membership builder"],
-  authors: [{ name: "EazyCutz Team" }],
+  metadataBase: new URL(siteUrl),
+  title: {
+    default: title,
+    template: `%s | ${siteName}`,
+  },
+  description,
+  keywords: [
+    "salon software",
+    "salon CRM",
+    "salon booking system",
+    "stylist scheduling",
+    "salon management app",
+    "membership builder",
+    "salon inventory",
+    "salon loyalty program",
+    "EazyCutz",
+  ],
+  authors: [{ name: "Tovance Private Limited" }],
+  creator: "Tovance Private Limited",
+  publisher: "Tovance Private Limited",
+  applicationName: siteName,
+  category: "business",
+  alternates: {
+    canonical: "/",
+  },
+  robots: {
+    index: true,
+    follow: true,
+    googleBot: {
+      index: true,
+      follow: true,
+      "max-image-preview": "large",
+      "max-snippet": -1,
+      "max-video-preview": -1,
+    },
+  },
+  icons: {
+    icon: [
+      { url: "/favicon-32x32.png", sizes: "32x32", type: "image/png" },
+      { url: "/favicon-16x16.png", sizes: "16x16", type: "image/png" },
+    ],
+    apple: [{ url: "/apple-touch-icon.png", sizes: "180x180", type: "image/png" }],
+    shortcut: ["/favicon-32x32.png"],
+  },
+  manifest: "/site.webmanifest",
   openGraph: {
-    title: "EazyCutz - The Modern Salon Operating System",
-    description: "Build custom memberships, automate scheduling, and scale your salon operations.",
-    url: "https://eazycutz.com",
-    siteName: "EazyCutz",
     type: "website",
+    locale: "en_IN",
+    url: siteUrl,
+    siteName,
+    title,
+    description,
+    images: [
+      {
+        url: "/og-image.png",
+        width: 512,
+        height: 512,
+        alt: "EazyCutz — The Modern Salon Operating System",
+      },
+    ],
   },
   twitter: {
     card: "summary_large_image",
-    title: "EazyCutz - The Modern Salon Operating System",
-    description: "Build custom memberships, automate scheduling, and scale your operations.",
+    title,
+    description,
+    images: ["/og-image.png"],
   },
+};
+
+export const viewport: Viewport = {
+  themeColor: [
+    { media: "(prefers-color-scheme: light)", color: "#ffffff" },
+    { media: "(prefers-color-scheme: dark)", color: "#0f0a1a" },
+  ],
+  colorScheme: "light dark",
+  width: "device-width",
+  initialScale: 1,
+};
+
+const jsonLd = {
+  "@context": "https://schema.org",
+  "@graph": [
+    {
+      "@type": "Organization",
+      "@id": `${siteUrl}/#organization`,
+      name: siteName,
+      url: siteUrl,
+      logo: `${siteUrl}/android-chrome-512x512.png`,
+      description,
+      sameAs: [],
+    },
+    {
+      "@type": "WebSite",
+      "@id": `${siteUrl}/#website`,
+      url: siteUrl,
+      name: siteName,
+      description,
+      publisher: { "@id": `${siteUrl}/#organization` },
+      inLanguage: "en-IN",
+    },
+    {
+      "@type": "SoftwareApplication",
+      name: siteName,
+      applicationCategory: "BusinessApplication",
+      operatingSystem: "Web",
+      description,
+      url: siteUrl,
+      offers: {
+        "@type": "Offer",
+        availability: "https://schema.org/InStock",
+        price: "0",
+        priceCurrency: "INR",
+        description: "Book a demo — personalized salon walkthrough",
+      },
+    },
+  ],
 };
 
 export default function RootLayout({
@@ -28,8 +136,19 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en" className="scroll-smooth">
+      <head>
+        <script
+          type="application/ld+json"
+          dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
+        />
+      </head>
       <body className="min-h-screen bg-white dark:bg-black text-foreground antialiased">
-        <MotionProvider>{children}</MotionProvider>
+        <MotionProvider>
+          <ContactModalProvider>
+            {children}
+            <ContactModal />
+          </ContactModalProvider>
+        </MotionProvider>
       </body>
     </html>
   );

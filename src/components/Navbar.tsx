@@ -4,19 +4,22 @@ import { useState, useEffect, useCallback } from "react";
 import Link from "next/link";
 import { motion, AnimatePresence } from "framer-motion";
 import { BrandLogo } from "@/components/BrandLogo";
+import { useContactModal } from "@/context/ContactModalContext";
 import { appleEase, mobileMenu, mobileMenuItem } from "@/lib/motion";
 
 const navItems = [
   { name: "Product", href: "#showcase" },
   { name: "Features", href: "#builder" },
-  { name: "Research", href: "#journey" },
+  { name: "Research", href: "#evidence" },
+  { name: "Roadmap", href: "#journey" },
+  { name: "Investors", href: "#cta" },
   { name: "Pricing", href: "#builder" },
-  { name: "Support", href: "#cta" },
 ];
 
 export default function Navbar() {
   const [isOpen, setIsOpen] = useState(false);
   const close = useCallback(() => setIsOpen(false), []);
+  const { openModal } = useContactModal();
 
   useEffect(() => {
     document.body.style.overflow = isOpen ? "hidden" : "";
@@ -29,6 +32,11 @@ export default function Navbar() {
     return () => window.removeEventListener("keydown", onKey);
   }, [close]);
 
+  const handleBookDemo = () => {
+    close();
+    openModal();
+  };
+
   return (
     <>
       <motion.header
@@ -37,7 +45,7 @@ export default function Navbar() {
         transition={{ duration: 0.6, ease: appleEase }}
         className="fixed top-0 left-0 right-0 z-50 apple-nav-bar-light border-b border-black/[0.08] shadow-[0_1px_0_rgba(0,0,0,0.04)]"
       >
-        <div className="mx-auto max-w-[1024px] px-4 sm:px-6">
+        <div className="mx-auto max-w-[1200px] px-4 sm:px-6">
           <div className="flex items-center justify-between h-14 md:h-16">
             <Link
               href="/"
@@ -57,9 +65,13 @@ export default function Navbar() {
             </nav>
 
             <div className="flex items-center gap-3 sm:gap-4 shrink-0">
-              <Link href="#cta" className="hidden sm:inline btn-primary text-[13px] sm:text-[15px] px-4 sm:px-5 py-2 min-h-[36px] sm:min-h-[38px]">
+              <button
+                type="button"
+                onClick={openModal}
+                className="hidden sm:inline btn-primary text-[13px] sm:text-[15px] px-4 sm:px-5 py-2 min-h-[36px] sm:min-h-[38px]"
+              >
                 Book a Demo
-              </Link>
+              </button>
               <button
                 type="button"
                 onClick={() => setIsOpen((v) => !v)}
@@ -104,9 +116,13 @@ export default function Navbar() {
                   </motion.li>
                 ))}
                 <motion.li custom={navItems.length} variants={mobileMenuItem} initial="closed" animate="open" className="pt-4">
-                  <Link href="#cta" onClick={close} className="btn-primary w-full text-center py-3 text-[15px]">
+                  <button
+                    type="button"
+                    onClick={handleBookDemo}
+                    className="btn-primary w-full text-center py-3 text-[15px]"
+                  >
                     Book a Demo
-                  </Link>
+                  </button>
                 </motion.li>
               </ul>
             </motion.nav>

@@ -199,7 +199,7 @@
   }
 
   .apple-copy {
-    @apply mx-auto max-w-[980px] px-5 sm:px-6;
+    @apply mx-auto max-w-[1200px] px-5 sm:px-6;
   }
 
   .apple-eyebrow {
@@ -268,6 +268,10 @@
 
   .btn-primary {
     @apply inline-flex items-center justify-center rounded-full bg-brand-violet text-white text-[17px] font-normal px-5 py-2 transition-all hover:bg-[#6d50e0] active:scale-[0.98];
+  }
+
+  .field-input {
+    @apply w-full rounded-xl border border-black/[0.1] bg-[#fbfbfd] px-3.5 py-2.5 text-[15px] text-[#1d1d1f] placeholder:text-[#86868b] outline-none transition-shadow focus:border-brand-violet/40 focus:ring-2 focus:ring-brand-violet/20;
   }
 
   .btn-ghost-light {

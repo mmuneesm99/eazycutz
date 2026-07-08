@@ -14,7 +14,7 @@ export const appleTransitionSlow: Transition = {
 };
 
 export const viewport = {
-  once: true,
+  once: false,
   amount: 0.2,
   margin: "0px 0px -60px 0px",
 } as const;

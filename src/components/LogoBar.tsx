@@ -24,7 +24,7 @@ export default function LogoBar() {
               key={name}
               initial={{ opacity: 0 }}
               whileInView={{ opacity: 1 }}
-              viewport={{ once: true }}
+              viewport={{ once: false }}
               transition={{ duration: 0.4, delay: idx * 0.05 }}
               className="text-sm font-semibold text-brand-primary/40 dark:text-white/30 tracking-tight"
             >

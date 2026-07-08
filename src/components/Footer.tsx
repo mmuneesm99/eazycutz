@@ -1,5 +1,8 @@
+"use client";
+
 import Link from "next/link";
 import { BrandLogo } from "@/components/BrandLogo";
+import { useContactModal } from "@/context/ContactModalContext";
 
 const footerColumns = [
   {
@@ -7,7 +10,8 @@ const footerColumns = [
     links: [
       { name: "Showcase", href: "#showcase" },
       { name: "Features", href: "#builder" },
-      { name: "Research", href: "#journey" },
+      { name: "Research", href: "#evidence" },
+      { name: "Roadmap", href: "#journey" },
     ],
   },
   {
@@ -15,13 +19,13 @@ const footerColumns = [
     links: [
       { name: "About", href: "#journey" },
       { name: "Investors", href: "#evidence" },
-      { name: "Contact", href: "#cta" },
+      { name: "Contact", href: "#cta", action: "book-demo" as const },
     ],
   },
   {
     title: "Support",
     links: [
-      { name: "Book a Demo", href: "#cta" },
+      { name: "Book a Demo", href: "#cta", action: "book-demo" as const },
       { name: "Documentation", href: "#" },
       { name: "Help", href: "#" },
     ],
@@ -36,9 +40,11 @@ const footerColumns = [
 ];
 
 export default function Footer() {
+  const { openModal } = useContactModal();
+
   return (
     <footer className="bg-[#f5f5f7] text-[#1d1d1f] pt-12 pb-8 border-t border-black/[0.06]" data-nav-theme="light">
-      <div className="mx-auto max-w-[980px] px-5 sm:px-6">
+      <div className="mx-auto max-w-[1200px] px-5 sm:px-6">
         <div className="mb-8">
           <Link href="/" aria-label="EazyCutz home" className="inline-block rounded-md overflow-hidden">
             <BrandLogo />
@@ -54,9 +60,19 @@ export default function Footer() {
               <ul className="space-y-2">
                 {group.links.map((link) => (
                   <li key={link.name}>
-                    <Link href={link.href} className="text-[12px] text-[#6e6e73] hover:underline">
-                      {link.name}
-                    </Link>
+                    {"action" in link && link.action === "book-demo" ? (
+                      <button
+                        type="button"
+                        onClick={openModal}
+                        className="text-[12px] text-[#6e6e73] hover:underline"
+                      >
+                        {link.name}
+                      </button>
+                    ) : (
+                      <Link href={link.href} className="text-[12px] text-[#6e6e73] hover:underline">
+                        {link.name}
+                      </Link>
+                    )}
                   </li>
                 ))}
               </ul>

@@ -3,12 +3,15 @@
 import Link from "next/link";
 import { motion } from "framer-motion";
 import { cn } from "@/lib/utils";
+import { useContactModal } from "@/context/ContactModalContext";
 import { appleEase } from "@/lib/motion";
 
 export type PromoLink = {
   label: string;
   href: string;
   primary?: boolean;
+  /** Opens the contact modal instead of navigating */
+  action?: "book-demo";
 };
 
 type PromoSectionProps = {
@@ -20,6 +23,7 @@ type PromoSectionProps = {
   subheadline?: string;
   links?: PromoLink[];
   className?: string;
+  copyClassName?: string;
   visualClassName?: string;
   children?: React.ReactNode;
 };
@@ -60,11 +64,13 @@ export function PromoSection({
   subheadline,
   links,
   className,
+  copyClassName,
   visualClassName,
   children,
 }: PromoSectionProps) {
   const t = themes[theme];
   const barTheme = navTheme ?? (theme === "light" ? "light" : "dark");
+  const { openModal } = useContactModal();
 
   return (
     <section
@@ -75,9 +81,9 @@ export function PromoSection({
       <motion.div
         initial={{ opacity: 0, y: 20 }}
         whileInView={{ opacity: 1, y: 0 }}
-        viewport={{ once: true, margin: "-8%" }}
+        viewport={{ once: false, margin: "-8%" }}
         transition={{ duration: 0.7, ease: appleEase }}
-        className="apple-copy"
+        className={cn("apple-copy", copyClassName)}
       >
         {eyebrow && <p className={cn("apple-eyebrow", t.eyebrow)}>{eyebrow}</p>}
         <h2 className="apple-headline">{headline}</h2>
@@ -85,7 +91,17 @@ export function PromoSection({
         {links && links.length > 0 && (
           <div className="apple-cta-row">
             {links.map((link) =>
-              link.primary ? (
+              link.action === "book-demo" ? (
+                <button
+                  key={link.label}
+                  type="button"
+                  onClick={openModal}
+                  className={link.primary ? t.primaryBtn : cn("apple-link", t.link)}
+                >
+                  {link.label}
+                  {!link.primary && " ›"}
+                </button>
+              ) : link.primary ? (
                 <Link key={link.label} href={link.href} className={t.primaryBtn}>
                   {link.label}
                 </Link>

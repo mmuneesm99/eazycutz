@@ -8,6 +8,10 @@ import {
   Calendar,
   Users,
   Scissors,
+  UserCog,
+  Package,
+  FileSpreadsheet,
+  Settings,
   TrendingUp,
   Bell,
   Search,
@@ -16,7 +20,7 @@ import { fadeUp, staggerContainerFast } from "@/lib/motion";
 
 const stats = [
   { label: "Revenue", value: "₹2,45,000", change: "+12.4%" },
-  { label: "Bookings", value: "148", change: "+8 today" },
+  { label: "Bookings", value: "148", change: "+5 today" },
   { label: "Clients", value: "1,245", change: "32 new" },
   { label: "Occupancy", value: "88%", change: "Peak 94%", highlight: true },
 ];
@@ -32,6 +36,10 @@ const navItems = [
   { icon: Calendar, label: "Calendar" },
   { icon: Users, label: "Clients" },
   { icon: Scissors, label: "Services" },
+  { icon: UserCog, label: "Staff" },
+  { icon: Package, label: "Inventory" },
+  { icon: FileSpreadsheet, label: "Reports" },
+  { icon: Settings, label: "Settings" },
 ];
 
 const chartPath = "M0,60 L40,52 L80,45 L120,38 L160,28 L200,32 L240,18 L280,12";
@@ -111,7 +119,9 @@ export function ProductDashboard({
           >
             <div>
               <p className="text-[10px] text-[#86868b] uppercase tracking-wider font-medium">Aura Styling Co.</p>
-              <h3 className="text-sm md:text-base font-semibold text-[#1d1d1f] tracking-tight mt-0.5">Good morning, Sarah</h3>
+              <h3 className="text-sm md:text-base font-semibold text-[#1d1d1f] tracking-tight mt-0.5">
+                Good morning, Sarah 👋
+              </h3>
             </div>
             <motion.span
               animate={animate ? { opacity: [1, 0.5, 1] } : {}}

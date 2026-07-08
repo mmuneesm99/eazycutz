@@ -14,7 +14,7 @@ interface AnimatedCounterProps {
 function AnimatedCounter({ value, duration = 1.5, suffix = "" }: AnimatedCounterProps) {
   const [count, setCount] = useState(0);
   const ref = useRef<HTMLSpanElement>(null);
-  const isInView = useInView(ref, { once: true, margin: "-100px" });
+  const isInView = useInView(ref, { once: false, margin: "-100px" });
 
   useEffect(() => {
     if (!isInView) return;
@@ -134,7 +134,7 @@ export default function ResearchStats() {
                 key={stat.id}
                 initial={{ opacity: 0, y: 30 }}
                 whileInView={{ opacity: 1, y: 0 }}
-                viewport={{ once: true, margin: "-50px" }}
+                viewport={{ once: false, margin: "-50px" }}
                 transition={{ duration: 0.5, delay: idx * 0.1 }}
                 className="p-8 rounded-2xl bg-brand-primary/40 border border-brand-border/10 backdrop-blur-sm flex flex-col justify-between hover:border-brand-purple/40 hover:bg-brand-primary/60 transition-all duration-300 group"
               >
