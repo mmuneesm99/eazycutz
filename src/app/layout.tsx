@@ -3,6 +3,7 @@ import "./globals.css";
 import { MotionProvider } from "@/components/motion/MotionProvider";
 import ContactModal from "@/components/ContactModal";
 import { ContactModalProvider } from "@/context/ContactModalContext";
+import { publicPath } from "@/lib/publicPath";
 
 const siteUrl = "https://eazycutz.com";
 const siteName = "EazyCutz";
@@ -49,13 +50,13 @@ export const metadata: Metadata = {
   },
   icons: {
     icon: [
-      { url: "/favicon-32x32.png", sizes: "32x32", type: "image/png" },
-      { url: "/favicon-16x16.png", sizes: "16x16", type: "image/png" },
+      { url: publicPath("/favicon-32x32.png"), sizes: "32x32", type: "image/png" },
+      { url: publicPath("/favicon-16x16.png"), sizes: "16x16", type: "image/png" },
     ],
-    apple: [{ url: "/apple-touch-icon.png", sizes: "180x180", type: "image/png" }],
-    shortcut: ["/favicon-32x32.png"],
+    apple: [{ url: publicPath("/apple-touch-icon.png"), sizes: "180x180", type: "image/png" }],
+    shortcut: [publicPath("/favicon-32x32.png")],
   },
-  manifest: "/site.webmanifest",
+  manifest: publicPath("/site.webmanifest"),
   openGraph: {
     type: "website",
     locale: "en_IN",
@@ -65,7 +66,7 @@ export const metadata: Metadata = {
     description,
     images: [
       {
-        url: "/og-image.png",
+        url: publicPath("/og-image.png"),
         width: 512,
         height: 512,
         alt: "EazyCutz — The Modern Salon Operating System",
@@ -76,7 +77,7 @@ export const metadata: Metadata = {
     card: "summary_large_image",
     title,
     description,
-    images: ["/og-image.png"],
+    images: [publicPath("/og-image.png")],
   },
 };
 

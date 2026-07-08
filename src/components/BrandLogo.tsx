@@ -1,5 +1,6 @@
 import Image from "next/image";
 import { cn } from "@/lib/utils";
+import { publicPath } from "@/lib/publicPath";
 
 type BrandLogoProps = {
   className?: string;
@@ -15,7 +16,7 @@ const sizes = {
 export function BrandLogo({ className, priority = false, variant = "default" }: BrandLogoProps) {
   return (
     <Image
-      src="/Logo.webp"
+      src={publicPath("/Logo.webp")}
       alt="EazyCutz"
       width={176}
       height={48}

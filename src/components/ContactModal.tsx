@@ -3,6 +3,7 @@
 import Image from "next/image";
 import { useContactModal } from "@/context/ContactModalContext";
 import { useEffect, useRef, useState } from "react";
+import { publicPath } from "@/lib/publicPath";
 
 const DURATION_MS = 200;
 
@@ -122,7 +123,7 @@ export default function ContactModal() {
           <div className="relative hidden flex-1 px-4 pb-6 md:mt-4 md:block">
             <div className="relative aspect-[437/650] max-h-[calc(90vh-140px)] w-full">
               <Image
-                src="/contact_us.jpg"
+                src={publicPath("/contact_us.jpg")}
                 alt=""
                 fill
                 className="object-contain object-bottom"
@@ -132,7 +133,7 @@ export default function ContactModal() {
           </div>
           <div className="relative h-32 w-full md:hidden">
             <Image
-              src="/contact_us.jpg"
+              src={publicPath("/contact_us.jpg")}
               alt=""
               fill
               className="object-cover object-center"
